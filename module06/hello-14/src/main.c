@@ -133,7 +133,6 @@ int main(void)
 #else
             wprintf(L"\n按回车继续...\n");
 #endif
-            continue;
         }
 
         wprintf(L"是否继续? (y/n)");
