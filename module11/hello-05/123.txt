@@ -1,0 +1,3 @@
+first line content
+year = 2026, pi = 3.1416
+third line: hello C stdio
