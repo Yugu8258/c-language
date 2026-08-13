@@ -1,0 +1,7 @@
+[2026-08-13 14:58:49] [INFO] Application initializing...
+[2026-08-13 14:58:49] [DEBUG] Starting app_excute.
+[2026-08-13 14:58:49] [DEBUG] Memory allocated succeddfully, now setting value.
+[2026-08-13 14:58:49] [INFO] Data value set to 42.
+[2026-08-13 14:58:49] [DEBUG] Finishing app_execute.
+[2026-08-13 14:58:49] [INFO] Application exited successfully.
+[2026-08-13 14:58:49] [INFO] Cleaning up application...
