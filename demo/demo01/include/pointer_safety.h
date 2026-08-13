@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stdboo.h>
+#include <stdbool.h>
 
 bool is_nullptr(const void *ptr);
 

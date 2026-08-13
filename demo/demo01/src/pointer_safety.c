@@ -1,5 +1,6 @@
 #include "pointer_safety.h"
 #include "error_handling.h"
+#include <stdlib.h>
 
 bool is_nullptr(const void *ptr)
 {

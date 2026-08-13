@@ -1,6 +1,6 @@
 #include "application_logic.h"
 #include "logger.h"
-#include "error_hangling.h"
+#include "error_handling.h"
 #include "pointer_safety.h"
 #include "memory_manager.h"
 
@@ -13,7 +13,7 @@ bool app_init(void)
         return false;
     }
 
-    set_lot_level(LOG_DEBUG);
+    set_log_level(LOG_DEBUG);
     log_message(LOG_INFO, "Application initializing...");
     
     return true;
@@ -44,9 +44,9 @@ bool app_execute(void)
     return true;
 }
 
-void app_clanup(void)
+void app_cleanup(void)
 {
     log_message(LOG_INFO, "Cleaning up application...");
-    logger_close;
+    logger_close();
 }
 

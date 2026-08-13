@@ -4,6 +4,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <string.h>
 
 static FILE *logFile = NULL;
 static LogLevel currentLevel = LOG_INFO;
@@ -11,7 +12,7 @@ static LogLevel currentLevel = LOG_INFO;
 // 初始化日志模块
 bool logger_init(const char *logFilePath)
 {
-    if (logFilePaht == NULL)
+    if (logFilePath == NULL)
     {
         logFile = stdout;
     }
@@ -50,7 +51,7 @@ void log_message(LogLevel level, const char *format, ...)
 
     // 打印时间戳
     char time_buf[20];
-    time_t noew = time(NULL);
+    time_t now = time(NULL);
     struct tm *now_tm = localtime(&now);
     strftime(time_buf, 20, "%Y-%m-%d %H:%M:%S", now_tm);
     fprintf(logFile, "[%s] ", time_buf);

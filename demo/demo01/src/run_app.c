@@ -1,7 +1,6 @@
-#include <stdio.h>
 #include <stdlib.h>
-
-#include "types.h"
+#include "application_logic.h"
+#include "logger.h"
 
 int main(void)
 {
@@ -17,8 +16,27 @@ int main(void)
      *  7. 包含主要运行逻辑
      */
 
-    i32 number = 100;
-    printf("numbe : %d\n", number);
+    // 初始化应用程序
+    if (!app_init())
+    {
+        log_message(LOG_ERROR, "Application initialization failed.");
+        logger_close();
+        return EXIT_FAILURE;
+    }
+
+    if (!app_execute())
+    {
+        log_message(LOG_ERROR, "Application execution failed.");
+        app_cleanup();
+        logger_close();
+        return EXIT_FAILURE;
+    }
+
+    log_message(LOG_INFO, "Application exited successfully.");
+
+    app_cleanup();
+    
+    logger_close();
 
     return EXIT_SUCCESS;
 }
