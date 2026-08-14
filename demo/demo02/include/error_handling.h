@@ -5,10 +5,10 @@
 
 typedef enum
 {
-    error_none = 0,                     // 无错误
-    error_memory_allocation_failed,     // 内存错误
-    error_invalid_operation,            // 无效参数
-    error_bounds,                       // 越界错误
+    ERROR_NONE = 0,                     // 无错误
+    ERROR_MEMORY_ALLOCATION_FAILED,     // 内存错误
+    ERROR_INVALID_OPERATION,            // 无效参数
+    ERROR_BOUNDS,                       // 越界错误
     // 可以根据需要添加更多的错误码
 } ErrorCode;
 

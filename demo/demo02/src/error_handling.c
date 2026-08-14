@@ -1,9 +1,9 @@
-#include "error_handing.h"
+#include "error_handling.h"
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
+// 注意: 静态全局变量非线程安全
 static ErrorCode current_error_code = ERROR_NONE;
 
 // 设置当前的错误码
@@ -45,7 +45,7 @@ ErrorCode check_not_null(void *ptr)
 void handle_error(ErrorCode code)
 {
     const char *error_string = get_error_string(code);
-    fprint(stderr, "Error: %s\n", error_string);
+    fprintf(stderr, "Error: %s\n", error_string);
     if (code != ERROR_NONE)
     {
         exit(EXIT_FAILURE);

@@ -2,10 +2,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
+#if defined(__linux__) || defined(__unix__)
 #include <malloc.h>
-
+#endif
 
 static size_t current_memory_usage = 0;
 
@@ -13,17 +13,14 @@ static size_t current_memory_usage = 0;
 void *safe_malloc(size_t size)
 {
     void *ptr = malloc(size);
-    if (ptr == NULL)
+    if (ptr != NULL)
     {
         current_memory_usage += size;
-    }
-    else
-    {
-        fprintf(stderr, "Error: Memory allocation failed for %zu bytes.\n", size);
-        exit(EXIT_FAILURE);
+        return ptr;
     }
 
-    return ptr;
+    fprintf(stderr, "Error: Memory allocation failed for %zu bytes.\n", size);
+    exit(EXIT_FAILURE);
 }
 
 // 安全重新分配内存
@@ -34,38 +31,36 @@ void *safe_realloc(void *ptr, size_t new_size)
     {
 #ifdef _WIN32
         old_size = _msize(ptr); // 特定用于Windows
-#else
+#elif defined(__linux__) || defined(__unix__)
         old_size = malloc_usable_size(ptr); // 特定用于Linux / macOS
+#else
+        old_size = 0;
 #endif
     }
 
     void *new_ptr = realloc(ptr, new_size);
-    if (new_ptr)
+    if (new_ptr != NULL)
     {
         current_memory_usage += new_size - old_size;
+        return new_ptr;
     }
-    else
-    {
-        fprintf(stderr, "Error: Memory reallocation failed for %zu bytes.\n", new_size);
-        exit(EXIT_FAILURE);
-    }
-    
-    return ptr;
+
+    fprintf(stderr, "Error: Memory reallocation failed for %zu bytes.\n", new_size);
+    exit(EXIT_FAILURE);
 }
 
 // 安全释放内存
 void safe_free(void **ptr)
 {
-    if (ptr && *ptr)
-    {
+    if (ptr == NULL || *ptr == NULL) { return; }
+
 #ifdef _WIN32
-        current_memory_usage -= _msize(*ptr);
-#else
-        current_memory_usage -= malloc_usable_size(*ptr);
+    current_memory_usage -= _msize(*ptr);
+#elif defined(__linux__) || defined(__unix__)
+    current_memory_usage -= malloc_usable_size(*ptr);
 #endif
-        free(*ptr);
-        *ptr = NULL;
-    }
+    free(*ptr);
+    *ptr = NULL;
 }
 
 // 打印当前内存的使用情况

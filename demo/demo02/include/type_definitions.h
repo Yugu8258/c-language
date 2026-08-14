@@ -21,12 +21,12 @@ typedef enum
     TYPE_F32,
     TYPE_F64,
     TYPE_CHAR,
-    TYPE_PRT
+    TYPE_PTR
 } DataType;
 
 typedef union
 {
-    i32 i23Value;
+    i32 i32Value;
     u32 u32Value;
     i64 i64Value;
     u64 u64Value;
