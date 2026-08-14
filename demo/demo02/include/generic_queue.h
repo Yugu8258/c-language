@@ -3,6 +3,7 @@
 #include "type_definitions.h"
 
 #include <stdbool.h>
+#include <stddef.h>
 
 // 泛型队列节点结构体
 typedef struct GenericQueueNode
